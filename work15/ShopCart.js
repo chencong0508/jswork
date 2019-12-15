@@ -42,21 +42,21 @@ Cart.prototype = {
      */
     add: function (data) {
         let tmp = this.tmp.cloneNode(true);
-        let item = new Item(tmp,data);
+        let item = new Item(tmp, data);
         let cart = this;
         //勾选
         item.check.onclick = function(){
             cart.updateTotal();
         };
         //增加数量
-        item.add.onclick = function(){
+        item.add.onclick = function() {
             item.num.textContent = ++item.data.num;
             item.updateSubtotal()
             cart.updateTotal();
         };
         //减少数量
-        item.reduce.onclick = function(){
-            if(item.data.num > 1){
+        item.reduce.onclick = function() {
+            if (item.data.num > 1) {
                 item.num.textContent = --item.data.num;
                 item.updateSubtotal();
                 cart.updateTotal();
@@ -66,26 +66,26 @@ Cart.prototype = {
         };
         //删除商品
         item.del.onclick = function() {
-            if(confirm('您确定要删除此商品吗？')){
-                    tmp.parentNode.removeChild(tmp);
-                    cart.del(item);
-                    cart.updateTotal();
+            if (confirm('您确定要删除此商品吗？')){
+              tmp.parentNode.removeChild(tmp);
+              cart.del(item);
+              cart.updateTotal();
             }
         };
         //更新小计
-item.updateSubtotal();
-//保存新增的商品对象
-this.items.push(item);
-//放入购物车容器中
-this.bottom.before(tmp);
+        item.updateSubtotal();
+        //保存新增的商品对象
+        this.items.push(item);
+        //放入购物车容器中
+        this.bottom.before(tmp);
       },
        /**
          * 删除保存的商品对象
          * @param {Object} item 待删除的商品对象
          */
-        del: function(item){
-            for(let i in this.items){
-                if(this.tiems[i] === item){
+        del: function(item) {
+            for (let i in this.items) {
+                if (this.tiems[i] === item) {
                     delete this.items[i];
                 }
             }
@@ -93,11 +93,11 @@ this.bottom.before(tmp);
         /**
          * 更新总计
          */
-        updateTotal: function(){
-            let num = 0,price = 0;
-            for(let i in this.items){
+        updateTotal: function() {
+            let num = 0, price = 0;
+            for (let i in this.items) {
                 let item = this.items[i];
-                if(item.check.checked){
+                if (item.check.checked) {
                     num += item.data.num;
                     price += item.data.num * item.data.price;
                 }
@@ -109,7 +109,7 @@ this.bottom.before(tmp);
          * 全选
          */
         checkAll: function() {
-            for(let i in this.items){
+            for(let i in this.items) {
                 this.items[i].check.checked = true;
             }
             this.updateTotal();
@@ -117,8 +117,8 @@ this.bottom.before(tmp);
         /*
          * 全不选
          */
-      uncheckAll: function(){
-          for(let i in this.items){
+      uncheckAll: function() {
+          for(let i in this.items) {
               this.items[i].check.checked = false;
           }
           this.updateTotal();
@@ -130,7 +130,7 @@ this.bottom.before(tmp);
  * @param {String} tmp 模板
  * @param {Array} data 数据 
  */
-function Item(tmp,data) {
+function Item(tmp, data) {
     let find = new Find(tmp);
     this.check = find.className('check');
     this.name = find.className('name');
@@ -151,7 +151,7 @@ function Item(tmp,data) {
        */
       updateSubtotal: function () {
           this.subtotal.textContent = (this.data.num * this.data.price).toFixed(2);
-        }
+      }
   };
   /**
    * Find 查找器
