@@ -109,7 +109,7 @@
         last: document.getElementById('page_last'),
         pageNum: document.getElementById('page_num'),
         onChange: function () {
-            comment.ajax('http://localhost:8080/ajax?page=' + this.page, function () {
+            comment.ajax('https://chencong0508.github.io/jswork/?page=' + this.page, function () {
                 progressBar = new ProgressBar(ProgressContainer);
                 progressBar.show();
             }, function (obj) {
